@@ -11,8 +11,8 @@ if __name__ == "__main__":
         db_cur = db_conn.cursor()
         db_cur.execute(sql_query)
         db_executed_sql = db_cur.fetchall()
-        for row in db_executed_sql:
-            print(row)
+        for count, row in enumerate(db_executed_sql):
+            print(f"{count}: {row} \n")
 
         print(dir(db_executed_sql))
 

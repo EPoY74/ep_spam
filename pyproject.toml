@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "ep-spam"
+version = "0.1.0"
+description = "Spam, learting and testing"
+authors = ["Eugenii B. Petrov <127658418+EPoY74@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

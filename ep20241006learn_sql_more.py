@@ -1,4 +1,5 @@
-"""Тыкаю палкой sqlite
+"""
+Тыкаю палкой sqlite
 """
 
 import sqlite3

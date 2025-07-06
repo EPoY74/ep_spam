@@ -34,19 +34,33 @@ def retry(repeat_count: int, delay_time: int):
     delay_time(int): Время задержки при выполнении оборачивемой функции
     """
 
-    @wraps
     def decorator_retry(func):
+        @wraps(func)
         def decorator_wrapper(*args, **kwargs):
-            result: Any | None = None
-
-            return result
+            last_exseption: Any | None = None
+            for i in range(1, repeat_count + 1):
+                print("Попытка номер ", i)
+                try:
+                    return func(*args, **kwargs)
+                except Exception as err:
+                    time.sleep(delay_time)
+                    last_exseption = err
+                    continue
+            raise Exception(last_exseption)
 
         return decorator_wrapper
 
     return decorator_retry
 
 
+@retry(repeat_count=3, delay_time=1)
 def sometimes_fail():
-    if random.random() < 0.7:
+    win_number = random.random()
+    print(win_number)
+    if win_number < 0.7:
+        print(f"Неудача: {win_number}")
         raise ValueError("Неудача")
     return "Успех"
+
+
+print(sometimes_fail())

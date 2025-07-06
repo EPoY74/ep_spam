@@ -31,6 +31,7 @@ csharp
 """
 
 from functools import wraps
+import time
 
 
 def log_call(func):
@@ -39,12 +40,19 @@ def log_call(func):
     переданных ей пареметров и результата.
     """
 
-    @wraps
+    @wraps(func)
     def wrapper(*args, **kwargs):
         print(func.__name__)
         print(f"Вызов {func.__name__}. Переданные аргуименты: {args}, {kwargs}")
-        print(f"Результат: {func(*args, **kwargs)}")
-        return func(*args, **kwargs)
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"Результат: {result}")
+        execution_time = end_time - start_time
+        print(
+            f"Время выполнения: {execution_time:.4f} секунд",
+        )
+        return result
 
     return wrapper
 
@@ -60,7 +68,7 @@ def add(a: int, b: int) -> int:
 
     Результат: int
     """
-
+    time.sleep(0.5)
     return a + b
 
 

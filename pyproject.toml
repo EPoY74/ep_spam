@@ -5,8 +5,23 @@ description = "Spam, learting and testing"
 authors = ["Eugenii B. Petrov <127658418+EPoY74@users.noreply.github.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.11"
+[project]
+requires-python = ">= 3.11"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+quote-style = "double"
+
+#рекомендуется по pep8
+indent-style = "space" 
+
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "SIM", "I", "A", "C", "T"]
+# ignore = []
 
 
 [build-system]

@@ -27,13 +27,14 @@ def retry(repeat_count: int, delay_time: int, errors: tuple = (Exception,)):
     Декоратор обеспечивает заданное repeat_count (int) количество повторов
     при указанной задержке delay_time(int) оборациваемой
     функции если она выбрасывает исключения, передаваемые в
-      кортеже errors(tuple), по умолчанию Exception
+      кортеже errors(tuple), по умолчанию Exception(все то есть)
 
     Аргументы:
     repeat_count(int): количество повтроров выполнения функции, если она
       выбрасывает исключение
     delay_time(int): Время задержки при выполнении оборачивемой функции
-    errors (tuple): Обабатываемые исключения (по умолчанию Exception)
+    errors (tuple): Обрабатываемые исключения
+    (по умолчанию Exception все то есть)
     """
 
     def decorator_retry(func):
@@ -45,10 +46,11 @@ def retry(repeat_count: int, delay_time: int, errors: tuple = (Exception,)):
                 try:
                     return func(*args, **kwargs)
                 except errors as err:
-                    print(f"Ошибка {err}, повтор через {delay_time} секунд")
+                    print(
+                        f"Ошибка: {err} \nПовтор через {delay_time} секунд(у)"
+                    )
                     time.sleep(delay_time)
                     last_exception = err
-                    continue
 
             if last_exception is not None:
                 raise last_exception
